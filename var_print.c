@@ -1,10 +1,9 @@
 #include "main.h"
 
 /**
- * print_int - print an integer from va_list
- * @args: input va_list
+ * print_number - prints unsigned int
+ * @n: num to print
  *
- * Return: 0 always
  */
 
 void print_number(unsigned int n)
@@ -18,6 +17,14 @@ void print_number(unsigned int n)
 	write(1, &c, 1);
 }
 
+/**
+ * count_digits - counts digits in unsigned int
+ * @n: number to eval
+ *
+ * Return: divide num by 10 rep until 0
+ * each div removes one digit
+ */
+
 int count_digits(unsigned int n)
 {
 	int count = 0;
@@ -29,6 +36,13 @@ int count_digits(unsigned int n)
 
 	return count;
 }
+
+/**
+ * print_int - prints signed integer
+ * @args: list of arguments from _printf
+ *
+ * Return: num of char printed
+ */
 
 int print_int(va_list args)
 {
@@ -54,29 +68,19 @@ int print_int(va_list args)
 }
 
 /**
- * print_uint - print an unsigned int from va_list
- * @args: input va_list
- *
- * Return: 0 always
- */
-int print_uint(va_list arg)
-{
-	unsigned int n = va_arg(args, unsigned int);
-
-	return (0);
-}
-
-/**
  * print_char - print a char from va_list
  * @args: input va_list
  *
  * Return: 0 always
  */
+
 int print_char(va_list args)
 {
-	char c = va_arg(args, char);
+	char c = (char) va_arg(args, int);
 
-	return (0);
+	write(1, &c, 1);
+
+	return (1);
 }
 
 /**
@@ -85,36 +89,18 @@ int print_char(va_list args)
  *
  * Return: 0 always
  */
+
 int print_str(va_list args)
 {
-	char *str = va_arg(args, char);
+	char *str = va_arg(args, char *);
+	int count = 0;
 
-	return (0);
-}
+	if (!str)
+		str = "(nil)";
+
+	while (str[count])
+		write(1, &str[count], 1), count++;
 
 
-/**
- * get_print_func - get the correct function based on type
- * @str: input string
- *
- * Return: pointer to the correct print function
- */
-int (*f)(va_list) get_print_func(char *str)
-{
-	print_func *funcs = {
-		{"d", print_int},
-		{"i", print_uint},
-		{"c", print_char},
-		{"s", print_str},
-		{NULL, NULL}
-	};
-	int i = 0;
-
-	while (funcs.str != NULL)
-	{
-		if (*(funcs.str) = *str)
-			return (funcs.f);
-	}
-
-	return (NULL);
+	return count;
 }
