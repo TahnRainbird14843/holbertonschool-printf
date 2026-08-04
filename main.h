@@ -13,5 +13,6 @@ int print_char(va_list);
 int print_str(va_list);
 int print_uint(va_list);
 int (*f)(va_list) get_print_func(char *str);
+int print_string(char *str);
 
 #endif
