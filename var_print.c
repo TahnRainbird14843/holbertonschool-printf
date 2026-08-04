@@ -93,6 +93,7 @@ int print_char(va_list args)
 int print_str(va_list args)
 {
 	char *str = va_arg(args, char *);
+	
 	int count = 0;
 
 	if (!str)
@@ -100,7 +101,6 @@ int print_str(va_list args)
 
 	while (str[count])
 		write(1, &str[count], 1), count++;
-
 
 	return count;
 }
