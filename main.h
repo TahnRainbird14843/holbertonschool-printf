@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * struct print_func - identifier structure
@@ -25,7 +26,6 @@ int print_uint(va_list);
 int (*get_print_func(char ch))(va_list);
 int print_string(char *str);
 void throw_error(int n);
-int count_digits(unsigned int n);
-void print_number(unsigned int n);
+int power(int n, int i);
 
 #endif

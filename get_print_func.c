@@ -17,10 +17,11 @@ int (*get_print_func(char ch))(va_list)
         };
         int i = 0;
 
-        while (funcs->ch != '\0')
+        while (funcs[i].ch != '\0')
         {
-                if (funcs->ch = ch)
-                        return (funcs->f);
+                if (funcs[i].ch == ch)
+                        return (funcs[i].f);
+		i++;
         }
 
         return (NULL);
