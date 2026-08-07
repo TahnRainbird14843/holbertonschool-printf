@@ -1,40 +1,18 @@
 #include "main.h"
 
 /**
- * print_number - prints unsigned int
- * @n: num to print
+ * power - get the power of n^i
+ * @n: base
+ * @i: exponent
  *
+ * Return: n ^ i
  */
-
-void print_number(unsigned int n)
+int power(int n, int i)
 {
-	char c;
+	if (i == 0)
+		return (1);
 
-	if (n / 10)
-		print_number(n / 10);
-
-	c = (n % 10) + '0';
-	write(1, &c, 1);
-}
-
-/**
- * count_digits - counts digits in unsigned int
- * @n: number to eval
- *
- * Return: divide num by 10 rep until 0
- * each div removes one digit
- */
-
-int count_digits(unsigned int n)
-{
-	int count = 0;
-
-	do {
-		count++;
-		n /= 10;
-	} while (n != 0);
-
-	return count;
+	return (n * power(n, i - 1));
 }
 
 /**
@@ -47,24 +25,35 @@ int count_digits(unsigned int n)
 int print_int(va_list args)
 {
 	int n = va_arg(args, int);
-	unsigned int num;
-	int count = 0;
+	int i;
+	int j = 0;
+	char *buffer = malloc(10);
 
 	if (n < 0)
 	{
-		write(1, "-", 1);
-		count++;
-		num = -n;
-	}
-	else
-	{
-		num = n;
+		n = -n;
+		buffer[j] = '-';
+		j++;
 	}
 
-	print_number(num);
-	count += count_digits(num);
-	
-	return count;
+	for (i = 9; i >= 0; i--)
+	{
+		if (n >= power(10, i) && i == 9)
+		{
+			buffer[j] = '0' + (n / power(10, i));
+			j++;
+		}
+		else if (n >= power(10, i))
+		{
+			buffer[j] = '0' + ((n % power(10, i + 1)) / power(10, i));
+			j++;
+		}
+	}
+
+	write(1, buffer, j);
+	free(buffer);
+
+	return (j);
 }
 
 /**
@@ -76,9 +65,12 @@ int print_int(va_list args)
 
 int print_char(va_list args)
 {
-	char c = (char) va_arg(args, int);
+	char *buffer = malloc(1);
 
-	write(1, &c, 1);
+	buffer[0] = '\0' + va_arg(args, int);
+
+	write(1, buffer, 1);
+	free(buffer);
 
 	return (1);
 }
@@ -93,14 +85,31 @@ int print_char(va_list args)
 int print_str(va_list args)
 {
 	char *str = va_arg(args, char *);
+	char *buffer = malloc(1024);
 	
 	int count = 0;
+	int i = 0;
 
 	if (!str)
 		str = "(nil)";
 
 	while (str[count])
-		write(1, &str[count], 1), count++;
+	{
+		if (i == 1023)
+		{
+			write(1, buffer, 1024);
+			i = 0;
+		}
+		else
+		{
+			buffer[i] = str[count];
+			i++;
+			count++;
+		}
+	}
+
+	write(1, buffer, i);
+	free(buffer);
 
 	return count;
 }
