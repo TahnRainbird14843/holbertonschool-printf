@@ -8,11 +8,15 @@
  */
 int (*get_print_func(char ch))(va_list)
 {
-        print_func funcs[4] = {
+        print_func funcs[] = {
                 {'d', print_int},
-                //{'i', print_uint},
+                {'i', print_int},
                 {'c', print_char},
                 {'s', print_str},
+		{'u', print_unsigned},
+		{'o', print_oct},
+		{'x', print_hex_low},
+		{'X', print_hex_up},
                 {'\0', NULL}
         };
         int i = 0;

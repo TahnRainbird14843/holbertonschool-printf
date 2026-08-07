@@ -113,3 +113,16 @@ int print_str(va_list args)
 
 	return count;
 }
+
+/**
+ * print_unsigned - prints unsigned int
+ * @args: list of arguments
+ *
+ * Return: num of char printed
+ */
+
+int print_unsigned(va_list args)
+{
+	unsigned int n = va_arg(args, unsigned int);
+	return print_base(n, 10, 0);
+}

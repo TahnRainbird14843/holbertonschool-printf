@@ -6,21 +6,17 @@
  */
 void throw_error(int n)
 {
-	if (n == 0)
-	{
-		write(1, "Incorrent identifier: try %d, %i, %c, or %s\n", 44);
-		exit(98);
-	}
 
-	if (n == 1)
-	{
-		write(1, "Argument type does not match identifier\n", 40);
-		exit(98);
-	}
+	char *msg;
 	
-	if (n == 2)
-	{
-		write(1, "NULL argument where non-NULL argument was expected\n", 51);
-		exit(98);
-	}
+	
+	if (n == 0)
+		msg = "Incorrect identifier: try %d, %i, %c, %s, %u, %o, %x, %X\n";
+	else if (n == 1)
+		msg = "Argument type does not match identifier\n";
+	else
+		msg = "NULL argument where non-NULL argument was expected\n";
+
+	write(1, msg, strlen(msg));
+	exit(98);
 }
