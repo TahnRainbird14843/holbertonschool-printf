@@ -58,15 +58,22 @@ int _printf(const char *str, ...)
 
 			func = get_print_func(str[i]);
 			if (!func)
-				throw_error(0);
+			{
+				write(1, "%", 1);
+				write(1, &str[i], 1);
+				count += 2;
+				i++; 
+				continue;
+			}
 
 			count += func(args);
 			memset(buffer, 0, 1024);
 			j = 0;
-			i++; 
+			i++;
 			continue;
+
 		}
-		else if (j == 1024)
+		else if (j == 1023)
 		{
 			write(1, buffer, j);
 			count += j;
