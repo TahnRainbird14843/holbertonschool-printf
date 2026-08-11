@@ -91,7 +91,7 @@ int print_str(va_list args)
 	int i = 0;
 
 	if (!str)
-		str = "(nil)";
+		str = "(null)";
 
 	while (str[count])
 	{
