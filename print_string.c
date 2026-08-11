@@ -22,6 +22,9 @@ int _printf(const char *str, ...)
 	if (!str)
 		exit(98);
 
+	if (str[0] == '%' && str[1] == '\0')
+		exit(98);
+
 	va_start(args, str);
 
 	memset(buffer, 0, 1024);
@@ -39,6 +42,11 @@ int _printf(const char *str, ...)
 			}
 
 			i++;
+
+			if (str[i] == '\0')
+			{
+				exit(98);
+			}
 
 			if (str[i] == '%')
 			{
