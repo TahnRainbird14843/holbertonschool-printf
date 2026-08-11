@@ -17,6 +17,7 @@ int (*get_print_func(char ch))(va_list)
 		{'o', print_oct},
 		{'x', print_hex_low},
 		{'X', print_hex_up},
+		{'b', print_binary},
                 {'\0', NULL}
         };
         int i = 0;
