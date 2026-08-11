@@ -1,21 +1,6 @@
 #include "main.h"
 
 /**
- * power - get the power of n^i
- * @n: base
- * @i: exponent
- *
- * Return: n ^ i
- */
-unsigned int power(unsigned int n, int i)
-{
-	if (i == 0)
-		return (1);
-
-	return (n * power(n, i - 1));
-}
-
-/**
  * print_int - prints signed integer
  * @args: list of arguments from _printf
  *
@@ -30,6 +15,12 @@ int print_int(va_list args)
 	int j = 0;
 	char *buffer = malloc(10);
 
+	if (m == 0)
+	{
+		write(1, "0", 1);
+		free(buffer);
+		return (1);
+	}
 	if (m < 0)
 	{
 		n = (unsigned int)-m;
