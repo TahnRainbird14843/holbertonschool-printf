@@ -100,7 +100,7 @@ int print_str(va_list args)
 	{
 		if (i == 1023)
 		{
-			write(1, buffer, 1024);
+			write(1, buffer, i);
 			i = 0;
 		}
 		else
