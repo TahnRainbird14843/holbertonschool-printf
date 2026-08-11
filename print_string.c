@@ -58,7 +58,7 @@ int _printf(const char *str, ...)
 			i++; 
 			continue;
 		}
-		else if (j == 1023)
+		else if (j == 1024)
 		{
 			write(1, buffer, j);
 			count += j;
