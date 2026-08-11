@@ -30,5 +30,7 @@ int print_oct(va_list);
 int print_hex_low(va_list);
 int print_hex_up(va_list);
 int print_base(unsigned int n, int base, int up);
+int print_binary(va_list);
+unsigned int int_log(unsigned int b, unsigned int n);
 
 #endif
