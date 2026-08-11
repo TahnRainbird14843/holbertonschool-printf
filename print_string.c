@@ -29,14 +29,24 @@ int _printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			write(1, buffer, j);
+			memset(buffer, 0, 1024);
+			j = 0;
 			i++;
+
+			if (str[i] == '%')
+			{
+				write(1, "%", 1);
+				count++;
+				i++;
+				continue;
+			}
+
 			func = get_print_func(str[i]);
 			if (!func)
 				throw_error(0);
+
 			count += func(args);
-			
 			i++; 
-			j = 0;
 			continue;
 		}
 		else if (j == 1024)
