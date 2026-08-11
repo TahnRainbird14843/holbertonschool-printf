@@ -7,7 +7,7 @@
  *
  * Return: n ^ i
  */
-int power(int n, int i)
+unsigned int power(unsigned int n, int i)
 {
 	if (i == 0)
 		return (1);
@@ -24,19 +24,20 @@ int power(int n, int i)
 
 int print_int(va_list args)
 {
+	int m = va_arg(args, int);
 	unsigned int n;
 	int i;
 	int j = 0;
 	char *buffer = malloc(10);
 
-	if (n < 0)
+	if (m < 0)
 	{
-		n = -va_arg(args, int);
+		n = (unsigned int)-m;
 		buffer[j] = '-';
 		j++;
 	}
 	else
-		n = va_arg(args, int);
+		n = (unsigned int)m;
 
 	for (i = 9; i >= 0; i--)
 	{
