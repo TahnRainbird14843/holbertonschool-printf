@@ -24,14 +24,11 @@ int _printf(const char *str, ...)
 	if (!str)
 		throw_error(2);
 
-	memset(buffer, 0, 1024);
-
 	while (str[i])
 	{
 		if (str[i] == '%')
 		{
 			write(1, buffer, j);
-			memset(buffer, 0, 1024);
 			i++;
 			func = get_print_func(str[i]);
 			if (!func)
@@ -42,10 +39,9 @@ int _printf(const char *str, ...)
 			j = 0;
 			continue;
 		}
-		else if (j == 1023)
+		else if (j == 1024)
 		{
 			write(1, buffer, j);
-			memset(buffer, 0, 1024);
 			j = 0;
 		}
 		else
