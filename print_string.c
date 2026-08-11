@@ -33,6 +33,7 @@ int _printf(const char *str, ...)
 			if (j > 0)
 			{
 				write(1, buffer, j);
+				count += j;
 				memset(buffer, 0, 1024);
 				j = 0;
 			}
@@ -60,17 +61,20 @@ int _printf(const char *str, ...)
 		else if (j == 1023)
 		{
 			write(1, buffer, j);
+			count += j;
 			memset(buffer, 0, 1024);
 			j = 0;
 		}
 		else
 		{
-			buffer[j++] = str[i++];
-			count++;
+			buffer[j] = str[i];
+			j++;
+			i++;
 		}
 	}
 
 	write(1, buffer, j);
+	count += j;
 	va_end(args);
 	free(buffer);
 
