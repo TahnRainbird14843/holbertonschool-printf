@@ -28,9 +28,13 @@ int _printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			write(1, buffer, j);
-			memset(buffer, 0, 1024);
-			j = 0;
+			if (j > 0)
+			{
+				write(1, buffer, j);
+				memset(buffer, 0, 1024);
+				j = 0;
+			}
+
 			i++;
 
 			if (str[i] == '%')
