@@ -24,17 +24,19 @@ int power(int n, int i)
 
 int print_int(va_list args)
 {
-	int n = va_arg(args, int);
+	unsigned int n;
 	int i;
 	int j = 0;
 	char *buffer = malloc(10);
 
 	if (n < 0)
 	{
-		n = -n;
+		n = -va_arg(args, int);
 		buffer[j] = '-';
 		j++;
 	}
+	else
+		n = va_arg(args, int);
 
 	for (i = 9; i >= 0; i--)
 	{
