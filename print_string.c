@@ -24,6 +24,8 @@ int _printf(const char *str, ...)
 	if (!str)
 		throw_error(2);
 
+	memset(buffer, 0, 1024);
+
 	while (str[i])
 	{
 		if (str[i] == '%')
@@ -50,12 +52,15 @@ int _printf(const char *str, ...)
 				throw_error(0);
 
 			count += func(args);
+			memset(buffer, 0, 1024);
+			j = 0;
 			i++; 
 			continue;
 		}
-		else if (j == 1024)
+		else if (j == 1023)
 		{
 			write(1, buffer, j);
+			memset(buffer, 0, 1024);
 			j = 0;
 		}
 		else
