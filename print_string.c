@@ -19,10 +19,10 @@ int _printf(const char *str, ...)
 	if (!buffer)
 		return(-1);
 
-	va_start(args, str);
-
 	if (!str)
-		throw_error(2);
+		exit(98);
+
+	va_start(args, str);
 
 	memset(buffer, 0, 1024);
 
