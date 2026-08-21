@@ -37,7 +37,7 @@ int _printf(const char *str, ...)
 			{
 				write(1, buffer, j);
 				count += j;
-				memset(buffer, 0, 1024);
+				memset(buffer, 0, j);
 				j = 0;
 			}
 
@@ -67,17 +67,17 @@ int _printf(const char *str, ...)
 			}
 
 			count += func(args);
-			memset(buffer, 0, 1024);
+			memset(buffer, 0, j);
 			j = 0;
 			i++;
 			continue;
 
 		}
-		else if (j == 1023)
+		else if (j == 1024)
 		{
 			write(1, buffer, j);
 			count += j;
-			memset(buffer, 0, 1024);
+			memset(buffer, 0, j);
 			j = 0;
 		}
 		else
